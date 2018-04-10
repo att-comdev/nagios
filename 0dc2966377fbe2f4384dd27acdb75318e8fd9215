@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18aeacac_1a7e5295",
+        "filename": "Dockerfile",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "don\u0027t need \u0027-r\u0027 (-f is needed)",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeedcd99_370c1b6a",
+        "filename": "Dockerfile",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "merge those together?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 5
+      },
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0ae3143_d3ec28bf",
+        "filename": "requirements.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "line",
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "539f7509_b30d7c4a",
+        "filename": "setup.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "line",
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ee6b23d_8758bca7",
+        "filename": "tests/__init__.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "empty file ... is that intended?",
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b23c051a_09f1e4a3",
+        "filename": "tests/unit/test_query_prometheus_alerts.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-04-10T19:37:45Z",
+      "side": 1,
+      "message": "/usr/bin/python2.7\n?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "0dc2966377fbe2f4384dd27acdb75318e8fd9215",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
