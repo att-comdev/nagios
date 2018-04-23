@@ -60,6 +60,12 @@ def main():
         type=str,
         required=False,
         help='OK message when alert is not firing. See examples.')
+    parser.add_argument(
+        '--metrics_csv',
+        metavar='metrics_csv',
+        type=str,
+        required=False,
+        help='Check if metrics are available, raise unknown if not available. example: metric1,metric2')
 
     args = parser.parse_args()
 
@@ -84,9 +90,17 @@ def main():
             firingScalarMessages.append(message)
 
     if firingScalarMessages:
-        print("CRITICAL: {}".format(",".join(firingScalarMessages)))
+        print(",".join(firingScalarMessages))
         sys.exit(STATE_CRITICAL)
     else:
+        if args.metrics_csv:
+            metrics_available, error_messages = check_prom_metrics_available(
+                args.prometheus_api, args.metrics_csv.split(","), args.labels_csv)
+            if not metrics_available and not error_messages:
+                print(
+                    "UNKNOWN: no metrics available to evaluate alert. Please ensure following metrics are flowing to the system: {}".format(
+                        args.metrics_csv))
+                sys.exit(STATE_UNKNOWN)
         if args.ok_message:
             print(args.ok_message)
         else:
@@ -122,6 +136,39 @@ def query_prometheus(prometheus_api, alertname, labels_csv):
                 str(e)))
 
     return response_json, error_messages
+
+
+def check_prom_metrics_available(prometheus_api, metrics, labels_csv):
+    error_messages = []
+    metrics_available = False
+    try:
+        metrics_with_query = []
+        for metric in metrics:
+            if labels_csv:
+                metrics_with_query.append(
+                    "absent({metric}{{{labels}}})".format(
+                        metric=metric, labels=labels_csv))
+            else:
+                metrics_with_query.append(
+                    "absent({metric})".format(metric=metric))
+        promql = " OR ".join(metrics_with_query)
+        query = {'query': promql}
+        response = requests.get(
+            include_schema(prometheus_api) +
+            "/api/v1/query",
+            params=query)
+        response_json = response.json()
+        if response_json['data']['result']:
+            if response_json['data']['result'][0]['value'][1] == "1":
+                metrics_available = False
+            else:
+                metrics_available = True
+    except Exception as e:
+        error_messages.append(
+            "ERROR invoking prometheus api {}".format(
+                str(e)))
+
+    return metrics_available, error_messages
 
 
 def include_schema(prometheus_api):
