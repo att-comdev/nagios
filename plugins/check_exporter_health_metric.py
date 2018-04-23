@@ -32,10 +32,10 @@ def main():
         description='Nagios plugin to query prometheus exporter and monitor metrics')
     parser.add_argument(
         '--exporter_api',
-        metavar='--ceph_exporter_api',
+        metavar='--exporter_api',
         type=str,
         required=True,
-        help='Ceph exporter location with scheme and port')
+        help='exporter location with scheme and port')
     parser.add_argument('--health_metric', metavar='--health_metric', type=str,
                         required=False, default="health_status",
                         help='Name of health metric')
@@ -75,7 +75,7 @@ def main():
         sys.exit(STATE_WARNING)
     else:
         print("OK: {metric_name} metric has a OK value({detail})".format(
-            metric_name=args.health_metrici, detail=str(metrics)))
+            metric_name=args.health_metric, detail=str(metrics)))
         sys.exit(STATE_OK)
 
 
@@ -90,7 +90,7 @@ def query_exporter_metric(exporter_api, metric_name):
             re.MULTILINE)
         for metric in line_item_metrics:
             metric_with_labels, value = metric.split(" ")
-            metrics[metric_with_labels] = int(value)
+            metrics[metric_with_labels] = float(value)
     except Exception as e:
         error_messages.append(
             "ERROR retrieving ceph exporter api {}".format(

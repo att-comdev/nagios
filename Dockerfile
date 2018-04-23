@@ -41,6 +41,7 @@ RUN           a2ensite nagios  && \
 
 COPY          bin/entrypoint.sh /entrypoint.sh
 COPY          plugins/* ${NAGIOS_PLUGIN_DIR}/
+COPY          bin/snmp-mibs/* /usr/share/snmp/mibs/
 
 COPY          bin/nagios_config_discovery_bot.py /usr/local/bin
 
