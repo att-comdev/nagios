@@ -11,6 +11,19 @@ fi
 if [ -n "$CEPH_METRICS_SERVICE" ]; then
   echo "\$USER3$=${CEPH_METRICS_SERVICE}" >> ${NAGIOS_HOME}/etc/resource.cfg
 fi
+if [ -n "$SNMP_NOTIF_PRIMARY_TARGET_WITH_PORT" ]; then
+  echo "\$USER4$=${SNMP_PRIMARY_TARGET_WITH_PORT}" >> ${NAGIOS_HOME}/etc/resource.cfg
+fi
+if [ -n "$SNMP_NOTIF_SECONDARY_TARGET_WITH_PORT" ]; then
+  echo "\$USER5$=${SNMP_SECONDARY_TARGET_WITH_PORT}" >> ${NAGIOS_HOME}/etc/resource.cfg
+fi
+if [ -n "$REST_NOTIF_PRIMARY_TARGET_URL" ]; then
+  echo "\$USER6$=${REST_NOTIF_PRIMARY_TARGET_URL}" >> ${NAGIOS_HOME}/etc/resource.cfg
+fi
+if [ -n "$REST_NOTIF_SECONDARY_TARGET_URL" ]; then
+  echo "\$USER7$=${REST_NOTIF_SECONDARY_TARGET_URL}" >> ${NAGIOS_HOME}/etc/resource.cfg
+fi
+
 touch ${NAGIOS_HOME}/etc/objects/prometheus_discovery_objects.cfg
 
 if [ ! -f ${NAGIOS_HOME}/etc/htpasswd.users ] ; then

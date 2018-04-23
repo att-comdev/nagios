@@ -32,10 +32,10 @@ def main():
         description='Nagios plugin to query prometheus exporter and monitor metrics')
     parser.add_argument(
         '--exporter_api',
-        metavar='--ceph_exporter_api',
+        metavar='--exporter_api',
         type=str,
         required=True,
-        help='Ceph exporter location with scheme and port')
+        help='exporter location with scheme and port')
     parser.add_argument('--health_metric', metavar='--health_metric', type=str,
                         required=False, default="health_status",
                         help='Name of health metric')
