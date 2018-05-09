@@ -8,6 +8,8 @@ ENV           NAGIOSADMIN_PASS nagios
 ENV           NAGIOSADMIN_EMAIL nagios@localhost
 ENV           NAGIOS_HOME /opt/nagios
 ENV           NAGIOS_PLUGIN_DIR /usr/lib/nagios/plugins
+ENV           APACHE_FRONTEND_PORT 8000
+ENV           APACHE_FRONTEND_SECURE_PORT 8443
 
 RUN           apt-get -o Acquire::ForceIPv4=true -y update \
               && apt-get -y install curl apache2 checkinstall unzip libapache2-mod-php snmp snmpd snmp-mibs-downloader jq python-requests \
@@ -33,7 +35,8 @@ RUN           cd /tmp  && \
               cd /tmp  && \
               rm -rf nagios-*
 
-ADD           apache2/sites-available/* /etc/apache2/sites-available/
+COPY          apache2/sites-available/* /etc/apache2/sites-available/
+COPY          apache2/ports.conf /etc/apache2/
 
 RUN           a2ensite nagios  && \
               a2enmod cgi && \
@@ -45,5 +48,6 @@ COPY          bin/snmp-mibs/* /usr/share/snmp/mibs/
 
 COPY          bin/nagios_config_discovery_bot.py /usr/local/bin
 
-EXPOSE        80/tcp
+EXPOSE        ${APACHE_FRONTEND_PORT}/tcp
+EXPOSE        ${APACHE_FRONTEND_SECURE_PORT}/tcp
 ENTRYPOINT    ["/entrypoint.sh"]
