@@ -18,7 +18,7 @@ set -x
 IMAGE=$1
 
 docker run \
-    -p 1800:80 \
+    -p 1800:8000 \
     -e 'PROMETHEUS_SERVICE=test' \
     --name nagios_test ${IMAGE} \
     &

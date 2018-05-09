@@ -38,6 +38,9 @@ if [ ! -f ${NAGIOS_HOME}/etc/htpasswd.users ] ; then
   chown -R ${NAGIOS_USER}:${NAGIOS_USER} ${NAGIOS_HOME}/etc/htpasswd.users
 fi
 
+sed -i -e 's/APACHE_FRONTEND_PORT/'${APACHE_FRONTEND_PORT}'/' /etc/apache2/ports.conf
+sed -i -e 's/APACHE_FRONTEND_SECURE_PORT/'${APACHE_FRONTEND_SECURE_PORT}'/' /etc/apache2/ports.conf
+
 /etc/init.d/apache2 restart
 /etc/init.d/nagios restart
 exec /usr/local/bin/nagios_config_discovery_bot.py -d --prometheus_api $PROMETHEUS_SERVICE --object_file_loc /opt/nagios/etc/objects/prometheus_discovery_objects.cfg
