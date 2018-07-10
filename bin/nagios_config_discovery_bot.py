@@ -115,10 +115,10 @@ def get_nagios_hostgroups_dictionary(prometheus_api):
         labels_json = query_prometheus(prometheus_api, 'kube_node_labels')
         for label_dictionary in labels_json['data']['result']:
             host_name = label_dictionary['metric']['node']
-            labels = []
+            labels = set()
             for key in label_dictionary['metric']:
                 if key.startswith('label_'):
-                    labels.append(key[6:])
+                    labels.add(key[6:])
             nagios_hostgroups[host_name] = labels
     except Exception as e:
         print(str(e))
