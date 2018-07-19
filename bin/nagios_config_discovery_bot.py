@@ -99,15 +99,18 @@ def reload_nagios():
 
 
 def get_nagios_hostgroups(prometheus_api):
-    nagios_hostgroups = []
+    hostgroup_labels = set()
     for host, labels in get_nagios_hostgroups_dictionary(
             prometheus_api).iteritems():
-        for label in labels:
-            nagios_hostgroup_defn = NAGIOS_HOSTGROUP_FORMAT.format(
-                hostgroup=label)
-            nagios_hostgroups.append(nagios_hostgroup_defn)
-    return "\n".join(nagios_hostgroups)
+        hostgroup_labels.update(labels)
 
+    nagios_hostgroups = []
+    for label in hostgroup_labels:
+        nagios_hostgroup_defn = NAGIOS_HOSTGROUP_FORMAT.format(
+                hostgroup=label)
+        nagios_hostgroups.append(nagios_hostgroup_defn)
+
+    return "\n".join(nagios_hostgroups)
 
 def get_nagios_hostgroups_dictionary(prometheus_api):
     nagios_hostgroups = {}
