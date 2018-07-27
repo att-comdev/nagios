@@ -2,7 +2,8 @@
 import argparse
 import sys
 import requests
-import subprocess  # nosec
+import os
+import signal
 import time
 
 NAGIOS_HOST_FORMAT = """
@@ -19,7 +20,7 @@ define hostgroup {{
   hostgroup_name {hostgroup}
 }}
 """
-
+NAGIOS_CMD_FILE='/opt/nagios/var/rw/nagios.cmd'
 
 def main():
     parser = argparse.ArgumentParser(
@@ -94,9 +95,10 @@ def update_config_file(prometheus_api, object_file_loc):
 
 
 def reload_nagios():
-    command = ["/usr/sbin/service", "nagios", "reload"]
-    subprocess.call(command, shell=False)  # nosec
-
+    try:
+        os.kill(1, signal.SIGHUP)
+    except Exception as e:
+        print(str(e))
 
 def get_nagios_hostgroups(prometheus_api):
     hostgroup_labels = set()

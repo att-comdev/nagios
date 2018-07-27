@@ -2,9 +2,7 @@ FROM          ubuntu:16.04
 
 MAINTAINER    Rakesh Patnaik (rp196m@att.com)
 
-ENV           VERSION=4.3.4
-ENV           NAGIOSADMIN_USER nagiosadmin
-ENV           NAGIOSADMIN_PASS nagios
+ENV           VERSION=4.4.1
 ENV           NAGIOSADMIN_EMAIL nagios@localhost
 ENV           NAGIOS_HOME /opt/nagios
 ENV           NAGIOS_PLUGIN_DIR /usr/lib/nagios/plugins
@@ -46,8 +44,7 @@ COPY          bin/entrypoint.sh /entrypoint.sh
 COPY          plugins/* ${NAGIOS_PLUGIN_DIR}/
 COPY          bin/snmp-mibs/* /usr/share/snmp/mibs/
 
-COPY          bin/nagios_config_discovery_bot.py /usr/local/bin
-
 EXPOSE        ${APACHE_FRONTEND_PORT}/tcp
 EXPOSE        ${APACHE_FRONTEND_SECURE_PORT}/tcp
+
 ENTRYPOINT    ["/entrypoint.sh"]
