@@ -44,7 +44,7 @@ run:
 
 .PHONY: build_nagios
 build_nagios:
-	docker build -t $(IMAGE) --label $(LABEL) -f Dockerfile .
+	docker build --network host -t $(IMAGE) --label $(LABEL) -f Dockerfile .
 
 .PHONY: clean
 clean:
