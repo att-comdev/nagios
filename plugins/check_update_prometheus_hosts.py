@@ -2,7 +2,8 @@
 import argparse
 import sys
 import requests
-import subprocess  # nosec
+import os
+import signal
 import time
 
 NAGIOS_HOST_FORMAT = """
@@ -19,6 +20,8 @@ define hostgroup {{
   hostgroup_name {hostgroup}
 }}
 """
+NAGIOS_OK = 0
+NAGIOS_CRITICAL = 2
 
 
 def main():
@@ -75,9 +78,16 @@ def main():
                         args.prometheus_api, args.object_file_loc)
                     time.sleep(args.update_seconds)
                 except Exception as e:
-                    print("Error updating nagios config {}".format(str(e)))
+                    print("Error updating nagios config")
+                    sys.exit(NAGIOS_CRITICAL)
         else:
-            update_config_file(args.prometheus_api, args.object_file_loc)
+            try:
+                update_config_file(args.prometheus_api, args.object_file_loc)
+            except Exception as e:
+                print("Error updating nagios config")
+                sys.exit(NAGIOS_CRITICAL)
+            print("Nagios hosts have been successfully updated")
+            sys.exit(NAGIOS_OK)
 
 
 def update_config_file(prometheus_api, object_file_loc):
@@ -85,8 +95,8 @@ def update_config_file(prometheus_api, object_file_loc):
     nagios_hostgroups = get_nagios_hostgroups(prometheus_api)
 
     if not nagios_hosts:
-        print("no host config discovered, hence avoiding a update")
-        return
+        print("no hosts discovered. Either prometheus is unreachable or is not collecting node metrics.")
+        sys.exit(NAGIOS_CRITICAL)
 
     with open(object_file_loc, 'w+') as object_file:
         object_file.write("{} \n {}".format(nagios_hosts, nagios_hostgroups))
@@ -94,8 +104,11 @@ def update_config_file(prometheus_api, object_file_loc):
 
 
 def reload_nagios():
-    command = ["/usr/sbin/service", "nagios", "reload"]
-    subprocess.call(command, shell=False)  # nosec
+    try:
+        os.kill(1, signal.SIGHUP)
+    except Exception as e:
+        print("Unable to reload Nagios with new host configuration")
+        sys.exit(NAGIOS_CRITICAL)
 
 
 def get_nagios_hostgroups(prometheus_api):
@@ -107,10 +120,11 @@ def get_nagios_hostgroups(prometheus_api):
     nagios_hostgroups = []
     for label in hostgroup_labels:
         nagios_hostgroup_defn = NAGIOS_HOSTGROUP_FORMAT.format(
-                hostgroup=label)
+            hostgroup=label)
         nagios_hostgroups.append(nagios_hostgroup_defn)
 
     return "\n".join(nagios_hostgroups)
+
 
 def get_nagios_hostgroups_dictionary(prometheus_api):
     nagios_hostgroups = {}
@@ -124,7 +138,8 @@ def get_nagios_hostgroups_dictionary(prometheus_api):
                     labels.add(key[6:])
             nagios_hostgroups[host_name] = labels
     except Exception as e:
-        print(str(e))
+        print("Unable to query prometheus at {} to retrieve hosts".format(prometheus_api))
+        sys.exit(NAGIOS_CRITICAL)
 
     return nagios_hostgroups
 
@@ -145,7 +160,8 @@ def get_nagios_hosts(prometheus_api):
                 host_name=host_name, host_ip=host_ip, hostgroups=hostgroups)
             nagios_hosts.append(nagios_host_defn)
     except Exception as e:
-        print(str(e))
+        print("Unable to query prometheus at {} to retrieve hosts".format(prometheus_api))
+        sys.exit(NAGIOS_CRITICAL)
 
     return "\n".join(nagios_hosts)
 
