@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30bc58c0_b00b3784",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-08-09T16:49:06Z",
+      "side": 1,
+      "message": "i would prefer a few more words to the comment (it\u0027s not clear at a glance what it means)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 67
+      },
+      "revId": "11b061a3afe6e4671d98900d7249b5ad5090fd73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c7e3dfd_b0ae64cf",
+        "filename": "plugins/check_elasticsearch_query.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-08-09T16:49:06Z",
+      "side": 1,
+      "message": "#!/usr/bin/python2.7",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "11b061a3afe6e4671d98900d7249b5ad5090fd73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}

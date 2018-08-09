@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56d3a393_520a8d89",
+        "filename": "plugins/post_rest_api_host_event.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2018-08-09T16:49:06Z",
+      "side": 0,
+      "message": "#!/bin/bash",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 19
+      },
+      "revId": "4852dfd1455db6fb2330744c599b0c2ada3c78f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
