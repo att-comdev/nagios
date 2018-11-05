@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8bb3ae0_8a512600",
+        "filename": "plugins/check_update_prometheus_hosts.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1010324
+      },
+      "writtenOn": "2018-11-05T21:41:25Z",
+      "side": 1,
+      "message": "will this work when Nagios is not pid 1?",
+      "revId": "5e6086670a1226de3a0a235a8ca4366090ec2a2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
