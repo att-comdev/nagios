@@ -41,4 +41,4 @@ sed -i -e 's/APACHE_FRONTEND_SECURE_PORT/'${APACHE_FRONTEND_SECURE_PORT}'/' /etc
 /etc/init.d/apache2 restart
 /etc/init.d/nagios stop
 
-exec /opt/nagios/bin/nagios /opt/nagios/etc/nagios.cfg
+/opt/nagios/bin/nagios /opt/nagios/etc/nagios.cfg

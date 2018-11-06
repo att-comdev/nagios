@@ -105,9 +105,14 @@ def update_config_file(prometheus_api, object_file_loc):
 
 def reload_nagios():
     try:
-        os.kill(1, signal.SIGHUP)
+        # NOTE(srwilkers): We need the worker PIDs parent, which is the
+        # grandparent of the running process
+        worker_pid = os.getpid()
+        grandparent_pid = os.popen("ps -p %d -oppid=" % os.getppid()).read().strip()
+        os.kill(int(grandparent_pid), signal.SIGHUP)
     except Exception as e:
-        print("Unable to reload Nagios with new host configuration")
+        print('Unable to reload Nagios with new host configuration')
+        print('Nagios worker PID: {}. Nagios worker grandparent PID: {}'.format(worker_pid, grandparent_pid))
         sys.exit(NAGIOS_CRITICAL)
 
 
