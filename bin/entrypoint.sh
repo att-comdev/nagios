@@ -31,6 +31,9 @@ fi
 if [ -n "$ELASTICSEARCH_SERVICE" ]; then
   echo "\$USER9\$=${ELASTICSEARCH_SERVICE}" >> ${NAGIOS_HOME}/etc/resource.cfg
 fi
+if [ -n "$CEPH_MGR_SERVICE" ]; then
+  echo "\$USER10\$=${CEPH_MGR_SERVICE}" >> ${NAGIOS_HOME}/etc/resource.cfg
+fi
 
 touch ${NAGIOS_HOME}/etc/objects/prometheus_discovery_objects.cfg
 chown nagios ${NAGIOS_HOME}/etc/objects/prometheus_discovery_objects.cfg
