@@ -22,6 +22,29 @@
       "revId": "28076ef9ec1cbb4aabf97cf55d269383d2f7751c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2b83d1f_0daefe32",
+        "filename": "plugins/eval_es_pattern_search.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1012474
+      },
+      "writtenOn": "2018-11-09T14:47:02Z",
+      "side": 1,
+      "message": "This also needs to be updated to remove all mention of AIC",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 20
+      },
+      "revId": "28076ef9ec1cbb4aabf97cf55d269383d2f7751c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
