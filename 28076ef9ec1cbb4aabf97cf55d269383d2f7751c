@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbd55289_13a6b36a",
+        "filename": "plugins/aicmonutil.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1012474
+      },
+      "writtenOn": "2018-11-09T14:46:33Z",
+      "side": 1,
+      "message": "This needs to be updated to remove references to AIC",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "28076ef9ec1cbb4aabf97cf55d269383d2f7751c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
