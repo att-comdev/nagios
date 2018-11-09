@@ -1,0 +1,9 @@
+Verified+1: Jenkins <attcomdev.jenkins@gmail.com>
+Code-Review+2: Chris Wedgwood <cw@f00f.org>
+Code-Review+2: Pete Birley <pete@port.direct>
+Workflow+1: Pete Birley <pete@port.direct>
+Submitted-by: Pete Birley <pete@port.direct>
+Submitted-at: Fri, 09 Nov 2018 14:27:56 +0000
+Reviewed-on: https://review.gerrithub.io/432205
+Project: att-comdev/nagios
+Branch: refs/heads/master
