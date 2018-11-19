@@ -31,7 +31,6 @@ import requests
 
 from nagiosutil import NagiosUtil
 
-
 def check_range(value):
     """validate range"""
     minutes = int(value)
@@ -41,7 +40,6 @@ def check_range(value):
                                          '(1 day) minutes.' % value)
     return minutes
 
-
 def check_threshold(value):
     """validate threshold"""
     threshold = int(value)
@@ -50,21 +48,19 @@ def check_threshold(value):
                                          ' Valid threshold is > 0' % value)
     return threshold
 
-
 def check_match(value):
     """validate match clauses"""
-    if not value:  # tolerate empty match clause
+    if not value: # tolerate empty match clause
         return
     try:
         match_fields = dict(item.split(':') for item in value.split(','))
         return match_fields
-    except BaseException:
+    except:
         raise argparse.ArgumentTypeError('%s is an invalid match clause(s) list.'
                                          ' Valid format is a comma separated'
                                          ' list of field name and value pairs.'
                                          ' ex. field1:value1,field2:value2,...'
                                          % value)
-
 
 def setup_argparse(parser):
     """setup argparse parser with arguments and help texts"""
@@ -87,6 +83,7 @@ def setup_argparse(parser):
     parser.add_argument('critical_threshold', type=check_threshold,
                         help=critical_threshold_help)
     parser.add_argument('--query_file', help='elasticsearch query file name')
+    parser.add_argument('--query_clause', help='elasticsearch query clause name')
     parser.add_argument('--simple_query', help='elasticsearch simple query str')
     parser.add_argument('--simple_query_fields', help=simple_query_fields_help)
     parser.add_argument('--match', type=check_match, help=match_help)
@@ -95,7 +92,6 @@ def setup_argparse(parser):
     parser.add_argument('--usr')
     parser.add_argument('--pwd')
     parser.add_argument('--debug', action='store_true')
-
 
 def get_index_name(args, lt_time, gte_time):
     """build the index name(s) based on the inputs and current time"""
@@ -108,16 +104,15 @@ def get_index_name(args, lt_time, gte_time):
         es_index = log_lt + ',' + log_gte
     return es_index
 
-
 def evaluate_results(response, args):
     """evaluate the results of the query against the threshold to
       determine the nagios service status"""
     if (not response or not hasattr(response, 'status_code')
-            or response.status_code < 200 or response.status_code >= 400
-            or not response.json()):
+            or response.status_code < 200 or response.status_code >= 400 or
+            not response.json()):
         NagiosUtil.service_unknown('Unexpected results found. ' + response.text)
-    elif (not response.json()['hits']
-          or int(response.json()['hits']['total']) < 0):
+    elif (not response.json()['hits'] or
+          int(response.json()['hits']['total']) < 0):
         NagiosUtil.service_unknown('Unexpected results found. ' + str(response.json()))
 
     if args.debug:
@@ -134,7 +129,6 @@ def evaluate_results(response, args):
                                                args.range, args.critical_msg))
     else:
         NagiosUtil.service_ok(args.ok_msg)
-
 
 def main():
     """Query elasticsearch using a combination of simple query pattern,
@@ -159,7 +153,7 @@ def main():
     gte_time = lt_time - datetime.timedelta(minutes=(int(args.range)))
 
     data = {
-        "inline": {
+        "inline" : {
             "query": {
                 "bool": {
                     "must": [
@@ -179,16 +173,16 @@ def main():
     }
 
     simple_query_clause = {
-        "simple_query_string": {
-            "fields": ["{{fields}}"],
-            "query": "{{query}}"
+        "simple_query_string" : {
+            "fields" : ["{{fields}}"],
+            "query" : "{{query}}"
         }
     }
 
-    if args.query_file:
+    if args.query_file and args.query_clause:
         with open(args.query_file, 'r') as queryfile:
-            query_str = queryfile.read()
-            data['inline']['query']['bool']['must'].append(json.loads(query_str))
+            clause = json.loads(queryfile.read())[args.query_clause]
+            data['inline']['query']['bool']['must'].append(clause)
 
     if args.match:
         for key in args.match:
@@ -206,8 +200,8 @@ def main():
 
     data['params'] = params
 
-    url = (args.endpoint + '/' + get_index_name(args, lt_time, gte_time) + '/'
-           + args.index_type + '/' + '_search/template')
+    url = (args.endpoint + '/' + get_index_name(args, lt_time, gte_time) + '/' +
+           args.index_type + '/' + '_search/template')
 
     if args.debug:
         print('query url:\n' + url)
@@ -226,7 +220,6 @@ def main():
         NagiosUtil.service_unknown('Unexpected Error Occurred. ' + str(req_ex))
 
     evaluate_results(response, args)
-
 
 if __name__ == '__main__':
     sys.exit(main())
