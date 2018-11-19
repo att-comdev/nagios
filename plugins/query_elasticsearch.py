@@ -87,6 +87,7 @@ def setup_argparse(parser):
     parser.add_argument('critical_threshold', type=check_threshold,
                         help=critical_threshold_help)
     parser.add_argument('--query_file', help='elasticsearch query file name')
+    parser.add_argument('--query_clause', help='elasticsearch query clause name')
     parser.add_argument('--simple_query', help='elasticsearch simple query str')
     parser.add_argument('--simple_query_fields', help=simple_query_fields_help)
     parser.add_argument('--match', type=check_match, help=match_help)
@@ -185,10 +186,10 @@ def main():
         }
     }
 
-    if args.query_file:
+    if args.query_file and args.query_clause:
         with open(args.query_file, 'r') as queryfile:
-            query_str = queryfile.read()
-            data['inline']['query']['bool']['must'].append(json.loads(query_str))
+            clause = json.loads(queryfile.read())[args.query_clause]
+            data['inline']['query']['bool']['must'].append(clause)
 
     if args.match:
         for key in args.match:
