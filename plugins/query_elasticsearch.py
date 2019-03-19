@@ -208,7 +208,7 @@ def main():
     data['params'] = params
 
     url = (args.endpoint + '/' + get_index_name(args, lt_time, gte_time) + '/'
-           + args.index_type + '/' + '_search/template')
+           + args.index_type + '/' + '_search/template/?ignore_unavailable=true')
 
     if args.debug:
         print('query url:\n' + url)
