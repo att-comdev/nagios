@@ -12,7 +12,7 @@ define host {{
   address {host_ip}
   host_name {host_name}
   hostgroups {hostgroups}
-  notifications_enabled
+  notifications_enabled 1
 }}
 """
 NAGIOS_HOSTGROUP_FORMAT = """
