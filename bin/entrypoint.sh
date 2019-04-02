@@ -36,6 +36,7 @@ if [ -n "$CEPH_MGR_SERVICE" ]; then
 fi
 
 touch ${NAGIOS_HOME}/etc/objects/prometheus_discovery_objects.cfg
+/${NAGIOS_PLUGIN_DIR}/check_update_prometheus_hosts.py --prometheus_api ${PROMETHEUS_SERVICE} -object_file_loc /opt/nagios/etc/objects/prometheus_discovery_objects.cfg
 chown nagios ${NAGIOS_HOME}/etc/objects/prometheus_discovery_objects.cfg
 
 sed -i -e 's/APACHE_FRONTEND_PORT/'${APACHE_FRONTEND_PORT}'/' /etc/apache2/ports.conf
