@@ -71,6 +71,9 @@ def main():
     elif args.hostgroups:
         print(get_nagios_hostgroups(args.prometheus_api))
     elif args.object_file_loc:
+        if os.path.isfile(args.object_file_loc):
+           print("Hosts are already added to the nagios")
+           sys.exit(NAGIOS_OK)
         if args.d:
             while True:
                 try:
