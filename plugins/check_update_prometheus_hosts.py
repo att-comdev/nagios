@@ -81,6 +81,9 @@ def main():
                     print("Error updating nagios config")
                     sys.exit(NAGIOS_CRITICAL)
         else:
+            if os.path.exists(args.object_file_loc) and (os.path.getsize(args.object_file_loc) > 0):
+                print("OK- Nagios host configuration already updated.")
+                sys.exit(NAGIOS_OK)
             try:
                 update_config_file(args.prometheus_api, args.object_file_loc)
             except Exception as e:
@@ -161,6 +164,8 @@ def get_nagios_hosts(prometheus_api):
             if hostgroup_dictionary[host_name]:
                 hostgroups = hostgroups + "," + \
                     ",".join(hostgroup_dictionary[host_name])
+                if hostgroups.find("promenade_genesis") != -1:
+                   hostgroups = hostgroups + ",prometheus-hosts"
             nagios_host_defn = NAGIOS_HOST_FORMAT.format(
                 host_name=host_name, host_ip=host_ip, hostgroups=hostgroups)
             nagios_hosts.append(nagios_host_defn)
