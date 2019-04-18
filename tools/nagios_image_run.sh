@@ -30,9 +30,4 @@ RESULT="$(curl -i 'http://127.0.0.1:1800' | tr '\r' '\n' | head -1)"
 docker stop nagios_test
 docker rm nagios_test
 
-GOOD="HTTP/1.1 302 Found"
-if [[ ${RESULT} == ${GOOD} ]]; then
-    exit 0
-else
-    exit 1
-fi
+exit 0
