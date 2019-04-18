@@ -17,6 +17,9 @@ IMAGE_TAG                  ?= latest
 HELM                       ?= helm
 LABEL                      ?= commit-id
 IMAGE_NAME                 := nagios
+PROXY                  	  ?= http://proxy.foo.com:8000
+NO_PROXY                   ?= localhost,127.0.0.1,.svc.cluster.local
+USE_PROXY                  ?= false
 
 IMAGE:=${DOCKER_REGISTRY}/${IMAGE_PREFIX}/$(IMAGE_NAME):${IMAGE_TAG}
 
@@ -44,7 +47,17 @@ run:
 
 .PHONY: build_nagios
 build_nagios:
+ifeq ($(USE_PROXY), true)
+	docker build --network host -t $(IMAGE) --label $(LABEL) -f Dockerfile \ 
+                --build-arg http_proxy=$(PROXY) \ 
+                --build-arg https_proxy=$(PROXY) \ 
+                --build-arg HTTP_PROXY=$(PROXY) \ 
+                --build-arg HTTPS_PROXY=$(PROXY) \ 
+                --build-arg no_proxy=$(NO_PROXY) \ 
+                --build-arg NO_PROXY=$(NO_PROXY) .
+else
 	docker build --network host -t $(IMAGE) --label $(LABEL) -f Dockerfile .
+endif
 
 .PHONY: clean
 clean:
