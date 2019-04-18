@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e09015e7_ca792fc4",
+        "filename": "Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1013696
+      },
+      "writtenOn": "2019-04-18T16:35:02Z",
+      "side": 1,
+      "message": "Please remove the Tabs i need to verify in the job also if thats works before merging",
+      "revId": "85bb4d7f9e3320c644b688127e644c12285139cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
