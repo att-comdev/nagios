@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b77ea59_a4658773",
+        "filename": "tools/nagios_image_run.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1015904
+      },
+      "writtenOn": "2019-04-22T21:26:00Z",
+      "side": 1,
+      "message": "Do you want to remove this line - as this still executes curl?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 68
+      },
+      "revId": "4ce2d3b63d6668efcf39a7b3eb07c883e9ec71ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
