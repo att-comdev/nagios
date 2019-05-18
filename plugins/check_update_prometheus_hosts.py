@@ -13,6 +13,9 @@ define host {{
   host_name {host_name}
   hostgroups {hostgroups}
   notifications_enabled 1
+  max_check_attempts 1
+  notification_period 24x7
+  contact_groups snmp_and_http_notifying_contact_group
 }}
 """
 NAGIOS_HOSTGROUP_FORMAT = """
