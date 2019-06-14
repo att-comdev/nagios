@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2a683d1_56a8fd05",
+        "filename": "plugins/query_es_failedlogins.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1014184
+      },
+      "writtenOn": "2019-06-14T16:43:51Z",
+      "side": 1,
+      "message": "Is it required?",
+      "revId": "639ca2f225f921123c6848d32e6efb3b1ff86e2e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
