@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6e65a1d_01ca1a23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2019-06-19T19:47:32Z",
+      "side": 1,
+      "message": "remove trailing .",
+      "range": {
+        "startLine": 7,
+        "startChar": 54,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "c360f7f6523b65addcf14fac8550ac40e60f6046",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02112624_ade31bf1",
+        "filename": "plugins/query_es_failedlogins.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2019-06-19T19:47:32Z",
+      "side": 1,
+      "message": "tws\nseems to be a lot of it in this file",
+      "range": {
+        "startLine": 128,
+        "startChar": 107,
+        "endLine": 128,
+        "endChar": 108
+      },
+      "revId": "c360f7f6523b65addcf14fac8550ac40e60f6046",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
